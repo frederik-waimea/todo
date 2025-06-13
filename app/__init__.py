@@ -55,27 +55,27 @@ def login_form():
 
 
 #-----------------------------------------------------------
-# Things page route - Show all the things, and new thing form
+# Tasks page route - Show all the tasks, and new tasks form
 #-----------------------------------------------------------
-@app.get("/things/")
-def show_all_things():
+@app.get("/tasks/")
+def show_all_tasks():
     with connect_db() as client:
         # Get all the things from the DB
         sql = """
-            SELECT things.id,
-                   things.name,
+            SELECT tasks.id,
+                   tasks.name,
                    users.name AS owner
 
-            FROM things
+            FROM tasks
             JOIN users ON things.user_id = users.id
 
-            ORDER BY things.name ASC
+            ORDER BY tasks.rating DESC
         """
         result = client.execute(sql)
-        things = result.rows
+        tasks = result.rows
 
         # And show them on the page
-        return render_template("pages/things.jinja", things=things)
+        return render_template("pages/tasks.jinja", tasks=tasks)
 
 
 #-----------------------------------------------------------
