@@ -64,7 +64,7 @@ def show_all_tasks():
         sql = """
             SELECT tasks.id,
                    tasks.name,
-                   users.name AS owner
+                   users.name
 
             FROM tasks
             JOIN users ON things.user_id = users.id
