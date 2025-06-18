@@ -64,10 +64,13 @@ def show_all_tasks():
         sql = """
             SELECT tasks.id,
                    tasks.name,
+                   users.id
                    users.name
 
             FROM tasks
-            JOIN users ON things.user_id = users.id
+            JOIN users ON tasks.id = users.id
+
+            WHERE tasks.id=?
 
             ORDER BY tasks.rating DESC
         """
